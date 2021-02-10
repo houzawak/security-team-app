@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Camp index{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Liste des camps et poste de gendarmerie</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="mb-2">
+                    <a href="{{ path('camp_new') }}" class="btn btn-sm btn-primary">Ajouter</a>
+                </div>
+                <table class="table table-bordered table-stripped table-hovered">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Libelle</th>
+                            <th>Type</th>
+                            <th>Ville</th>
+                            <th>Prefecture</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for camp in camps %}
+                        <tr>
+                            <td>{{ camp.code }}</td>
+                            <td>{{ camp.libelle }}</td>
+                            <td>{{ camp.typeCamp.libelle }}</td>
+                            <td>{{ camp.ville.libelle }}</td>
+                            <td>{{ camp.ville.commune.prefecture.libelle }}</td>
+                            <td>
+                                <!--<a href="{{ path('camp_show', {'code': camp.code}) }}">Afficher</a>-->
+                                <a href="{{ path('camp_edit', {'code': camp.code}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

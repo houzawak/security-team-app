@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne | Details {% endblock %}
+
+{% block body %}
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-10 col-lg-10">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Informations détaillées</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table table-stripped">
+                    <tbody>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ personne.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenoms</th>
+                            <td>{{ personne.prenoms }}</td>
+                        </tr>
+                        <tr>
+                            <th>Poste</th>
+                            <td>{{ personne.poste }}</td>
+                        </tr>
+                        <tr>
+                            <th>Grade</th>
+                            <td>{{ personne.grade }}</td>
+                        </tr>
+                        <tr>
+                            <th>Camp / Poste de Gendarmerie</th>
+                            <td>{{ personne.campAffectation.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo</th>
+                            <td>
+                                {% if personne.photo %}
+                                    <img src={{ asset("uploads/photos/") ~ personne.photo}} alt="" style="max-width:400px;max-height:400px;"/>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Enregistré le</th>
+                            <td>{{ personne.createdAt ? personne.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dernière modification</th>
+                            <td>{{ personne.updatedAt ? personne.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row mt-2 mb-3">
+                    <div class="col-sm-12">
+                        <a href="{{ path('personne_index') }}" class="btn btn-sm btn-secondary">Afficher la liste</a>
+                        <a href="{{ path('personne_edit', {'id': personne.id}) }}" class="btn btn-sm btn-second">Modifier</a>
+                        {{ include('personne/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

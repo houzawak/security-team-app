@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne | Liste{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Liste des Agents</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="mb-2">
+                    <a href="{{ path('personne_new') }}" class="btn btn-sm btn-primary">Ajouter</a>
+                </div>
+                <table class="table table-bordered table-stripped table-hovered">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenoms</th>
+                            <th>Poste</th>
+                            <th>Grade</th>
+                            <th>Camp/Poste</th>
+                            <th>Ville</th>
+                            <th>Commune</th>
+                            <th>Prefecture</th>
+                            <th>Region</th>
+                            <th>Date Enreg.</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for personne in personnes %}
+                        <tr>
+                            <td>{{ personne.nom }}</td>
+                            <td>{{ personne.prenoms }}</td>
+                            <td>{{ personne.poste }}</td>
+                            <td>{{ personne.grade }}</td>
+                            <td>{{ personne.campAffectation.libelle }}</td>
+                            <td>{{ personne.campAffectation.ville.libelle }}</td>
+                            <td>{{ personne.campAffectation.ville.commune.libelle }}</td>
+                            <td>{{ personne.campAffectation.ville.commune.prefecture.libelle }}</td>
+                            <td>{{ personne.campAffectation.ville.commune.prefecture.region.libelle }}</td>
+                            <td>{{ personne.createdAt ? personne.createdAt|date('d/m/Y') : '' }}</td>
+                            <td>
+                                <a href="{{ path('personne_show', {'id': personne.id}) }}">Afficher</a>
+                                <a href="{{ path('personne_edit', {'id': personne.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

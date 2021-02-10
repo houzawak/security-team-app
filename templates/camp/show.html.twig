@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Camp{% endblock %}
+
+{% block body %}
+    <h1>Camp</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Code</th>
+                <td>{{ camp.code }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ camp.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('camp_index') }}">back to list</a>
+
+    <a href="{{ path('camp_edit', {'code': camp.code}) }}">edit</a>
+
+    {{ include('camp/_delete_form.html.twig') }}
+{% endblock %}

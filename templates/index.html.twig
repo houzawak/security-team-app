@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('assets/js/homepage.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Recherche</h1>
+{#        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i#}
+{#                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>#}
+    </div>
+
+
+
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Parcourir</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                             aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form id="searchTeam"  method="post" action="" >
+                        <div class="form-group row">
+                            <label for="region" class="col-sm-3">Région</label>
+                            <div class="col-sm-7">
+                                <select id="region" name="region" class="form-control form-control-sm">
+                                    <option value="">--Choisissez--</option>
+                                    {% for r in regions %}
+                                        <option value="{{ r.code }}">{{ r.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prefecture" class="col-sm-3">Préfecture</label>
+                            <div class="col-sm-7">
+                                <select id="prefecture" name="prefecture" class="form-control form-control-sm">
+                                    <option value="">--Choisissez--</option>
+                                    {% for p in prefectures %}
+                                        <option value="{{ p.code }}">{{ p.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="commune" class="col-sm-3">Commune</label>
+                            <div class="col-sm-7">
+                                <select id="commune" name="commune" class="form-control form-control-sm">
+                                    <option value="">--Choisissez--</option>
+                                    {% for c in communes %}
+                                        <option value="{{ c.code }}">{{ c.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ville" class="col-sm-3">Ville</label>
+                            <div class="col-sm-7">
+                                <select id="ville" name="ville" class="form-control form-control-sm">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="camp" class="col-sm-3">Camp / Poste</label>
+                            <div class="col-sm-7">
+                                <select id="camp" name="camp" class="form-control form-control-sm">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row m-auto">
+                            <button type="submit" class="btn btn-sm btn-primary m-auto"><span></span>Afficher</button>
+                        </div>
+                    </form>
+                    <div id="resultat" class="mt-2 pt-2">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Content Row -->
+{% endblock %}
